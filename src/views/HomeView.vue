@@ -3,15 +3,22 @@
 import NavBar from "@/components/NavBar.vue";
 import Hero from "@/components/Hero.vue";
 import VehiculeList from "@/components/VehiculeList.vue";
-import Prestations from "@/components/Prestations.vue";
+import Services from "@/components/Services.vue";
+import TestimonialsExtract from "@/components/TestimonialsExtract.vue";
+import Footer from "@/components/Footer.vue";
 </script>
 
 <template>
   <NavBar/>
+  <main>
   <Hero/>
   <VehiculeList/>
-  <Button label="VOIR TOUS NOS VEHICULES" class="ml-3 p-button-outlined font-bold"></Button>
-  <div class="p-6">
+  <div class="p-6 flex justify-content-center">
+    <RouterLink to="/Véhicules">
+  <Button label="TOUS NOS VEHICULES" icon="pi pi-arrow-up-right" iconPos="right" class="px-5 py-3 p-button-outlined font-bold w-full lg:w-auto white-space-nowrap" style="white-space: nowrap"></Button>
+    </RouterLink>
+  </div>
+    <div class="p-6">
     <div class="border-2 border-black-alpha-90 surface-border border-round surface-card text-2xl line-height-4">
     <p>
       Nous assurons toutes les réparations mécaniques de votre véhicule, diagnostic, révision, entretien, réparation. <br>
@@ -21,7 +28,9 @@ import Prestations from "@/components/Prestations.vue";
     </p>
     </div>
   </div>
-<Prestations/>
-  <main>
+<Services/>
+  <TestimonialsExtract/>
+  <Footer/>
+
   </main>
 </template>
