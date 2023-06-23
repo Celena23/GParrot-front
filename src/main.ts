@@ -19,6 +19,9 @@ import FileUpload from 'primevue/fileupload';
 import ToastService from 'primevue/toastservice';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
+import Calendar from 'primevue/calendar';
+import DataView from 'primevue/dataview';
+import DataViewLayoutOptions from 'primevue/dataviewlayoutoptions'   // optional
 
 
 
@@ -33,6 +36,8 @@ app.component("Textarea", Textarea)
 app.component("FileUpload", FileUpload)
 app.component("DataTable",DataTable)
 app.component("Column", Column)
+app.component("Calendar", Calendar)
+app.component("DataView", DataView)
 
 
 app.mount('#app')

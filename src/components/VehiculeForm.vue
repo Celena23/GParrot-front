@@ -61,13 +61,13 @@
         <div class="surface-border border-top-1 opacity-50 mb-3 col-12"></div>
         <div class="field mb-4 col-12 md:col-6">
           <label class="font-medium text-900 font-medium">Mise en circulation</label>
-          <InputText v-model="v$.mise_circulation.$model" type="text" />
-          <div v-if="v$.mise_circulation.$error" class="errorMessage">{{errorMessage}}</div>
+          <InputText type="date" v-model="v$.miseCirculation.$model" />
+          <div v-if="v$.miseCirculation.$error" class="errorMessage">{{errorMessage}}</div>
         </div>
         <div class="field mb-4 col-12 md:col-6">
           <label class="font-medium text-900 font-medium">Date de mise en vente</label>
-          <InputText v-model="v$.date_vente.$model" type="text" />
-          <div v-if="v$.date_vente.$error" class="errorMessage">{{errorMessage}}</div>
+          <InputText type="date" v-model="v$.dateVente.$model" />
+          <div v-if="v$.dateVente.$error" class="errorMessage">{{errorMessage}}</div>
         </div>
         <div class="surface-border border-top-1 opacity-50 mb-3 col-12"></div>
         <div class="field mb-4 col-12 md:col-12">
@@ -102,11 +102,13 @@
 import {reactive, ref} from "vue";
 import { useVuelidate } from '@vuelidate/core';
 import {required} from "@vuelidate/validators";
-import { Vehicule } from "@/entities/Vehicule";
+
+import axios, { AxiosError, AxiosResponse } from "axios";
+import {useRouter} from "vue-router";
 
 const vehicule = reactive({
   marque:'',
-  mise_circulation:'',
+  miseCirculation:'',
   kilometrage:'',
   description:'',
   modele:'',
@@ -117,12 +119,12 @@ const vehicule = reactive({
   co2:'',
   couleur:'',
   prix:'',
-  date_vente:'',
+  dateVente:'',
   photos:[]
 })
 const rules = {
   marque: { required },
-  mise_circulation: {required},
+  miseCirculation: {required},
   kilometrage: {required},
   description: {required},
   modele: {required},
@@ -133,7 +135,7 @@ const rules = {
   co2: {},
   couleur: {required},
   prix: {required},
-  date_vente: {required},
+  dateVente: {required},
   photos: {},
 }
 
@@ -141,18 +143,21 @@ const v$ = useVuelidate(rules, vehicule)
 
 let error = ref<string | undefined>();
 let errorMessage = 'Ce champ est obligatoire';
+const router = useRouter();
 
-// const onChangeField = () => {
-//   v$.value.$validate()
-// }
 
-// const onClickSave = async() => {
-//   error.value = undefined
-//   const isValid = await v$.value.$validate()
-//   if (!isValid) error.value = 'Assurez-vous que tous les champs obligatoires soient renseignés'
-//   else {
-//   console.log(vehicule) }
-// } ;
+const onClickSave = async () => {
+  error.value = undefined
+  const isValid = await v$.value.$validate()
+  if (!isValid) error.value = 'Assurez vous que tous les champs obligatoires soient renseignés'
+  else {
+
+    axios
+        .post("http://localhost:8080/vehicule", vehicule, {headers: {"Content-Type": "application/json"}})
+        .then(() => router.push('/AdministrationParrot'))
+        .catch((err: AxiosError) => error.value = err.message)
+  }
+}
 
 </script>
 

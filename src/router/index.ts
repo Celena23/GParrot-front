@@ -5,6 +5,7 @@ import VehiculesToSale from "@/views/VehiculesToSale.vue";
 import AdminParrot from "@/views/AdminParrot.vue";
 import AdminParrotView from "@/views/AdminParrotView.vue";
 import LoginView from "@/views/LoginView.vue";
+import VehiculeForm from "@/components/VehiculeForm.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,6 +30,11 @@ const router = createRouter({
     name: 'LoginParrot',
     component: LoginView
 },
+    {
+      path: '/ajoutvehicule',
+      name: 'AddVehicule',
+      component: VehiculeForm
+    },
   ]
 })
 

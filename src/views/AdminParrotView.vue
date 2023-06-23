@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 import VehiculeForm from "@/components/VehiculeForm.vue";
+import DataTableVehicule from "@/components/DataTableVehicule.vue";
 </script>
 
 <template>
@@ -10,7 +11,7 @@ data table avec possibilité de modifier
   espace pour ajouter un employé
     data table avec possibilité de modifier
     bouton ajouter un utilisateur
-<!--  <DataTable/>-->
-  <VehiculeForm/>
+  <DataTableVehicule/>
+<!--  <VehiculeForm/>-->
 </template>
 

@@ -1,6 +1,6 @@
 export type Vehicule = {
     marque?: string ;
-    mise_circulation?: string ;
+    miseCirculation?: Date ;
     kilometrage?: number ;
     description?: string ;
     modele?: string ;
@@ -11,6 +11,7 @@ export type Vehicule = {
     co2?: string ;
     couleur?: string ;
     prix?: number ;
-    date_vente?: string ;
-    photos?: string ;
+    dateVente?: Date ;
+    photos?: any ;
+
 }

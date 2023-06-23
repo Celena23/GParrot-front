@@ -5,7 +5,7 @@
     --surface-d:#dee2e6;
     --surface-e:#ffffff;
     --surface-f:#ffffff;
-    --text-color: #186abb;
+    --text-color: #212225;
     --text-color-secondary:#6c757d;
     --primary-color: #212225;
     --primary-color-hover : #4b4d54;
@@ -39,9 +39,9 @@
     --surface-section:#ffffff;
     --surface-card:#ffffff;
     --surface-overlay:#ffffff;
-    --surface-border:#dee2e6;
+    --surface-border: #212529;
     --surface-hover:#e9ecef;
-    --focus-ring: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+    --focus-ring: 0 0 0 0.2rem rgba(34, 36, 38, 0.5);
     --maskbg: rgba(0, 0, 0, 0.4);
     --highlight-bg: var(--primary-color);
     --highlight-text-color: #ffffff;
@@ -255,7 +255,7 @@
 .p-autocomplete:not(.p-disabled).p-focus .p-autocomplete-multiple-container {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(45, 47, 51, 0.5);
     border-color: var(--primary-color);
 }
 .p-autocomplete .p-autocomplete-multiple-container {
@@ -1108,7 +1108,7 @@
 .p-inputtext:enabled:focus {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(255, 246, 243, 0.5);
     border-color: var(--primary-color);
 }
 .p-inputtext.p-invalid.p-component {
