@@ -1,99 +1,51 @@
-<template>
-
-  <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
-<!--    <div class="text-900 font-medium text-4xl mb-4">Nos nouveautés</div>-->
-<!--    <p class="mt-0 p-0 mb-5 text-600 text-2xl">From Brand</p>-->
-
-    <div class="grid -mt-3 -ml-3 -mr-3">
-      <div class="col-12 md:col-6 lg:col-6 mb-3 lg:mb-0">
-        <div class="p-2">
-          <div class="relative">
-            <img src="src/assets/bmw.jpg" class="w-full" />
+  <template>
+    <div class="card">
+      <DataView ref="dt" :value="vehicules" v-model:selection="selectedVehicules" :layout="layout" dataKey="id">
+        <template #header>
+          <Filters/>
+        </template>
+        <template #grid="slotProps">
+          <div class="col-12 sm:col-12 md:12 lg:col-6 xl:col-6 p-6">
+            <div class="p-4 border-1 surface-border cursor-pointer">
+              <div class="p-4">
+                <img src="src/assets/bmw.jpg" class="w-full overflow-hidden"/>
+                <div class="flex align-items-center justify-content-between mt-5 mb-3">
+                  <span class="text-900 font-medium text-xl">{{ slotProps.data.marque }} {{ slotProps.data.modele }}</span>
+                </div>
+                <span class="text-900">{{ slotProps.data.kilometrage }} / {{ slotProps.data.miseCirculation }} / {{ slotProps.data.carburant }}</span>
+                <div class="text-900 text-xl font-medium mt-3">{{ slotProps.data.prix }} €</div>
+              </div>
+            </div>
           </div>
-          <div class="flex align-items-center justify-content-between mt-3 mb-2 ">
-            <span class="text-900 font-medium text-xl">MARQUE + MODEL + PUISSANCE</span>
-          </div>
-          <DIV>
-            <span class="flex text-600 mt-3">KM /+ DATE SERVICE /+ TYPE CARBURANT</span>
-          </DIV>
-          <DIV>
-          <span class="flex text-600 mt-3">PRIX €</span>
-          </DIV>
-        </div>
-      </div>
-      <div class="col-12 md:col-6 lg:col-6 mb-3 lg:mb-0">
-        <div class="p-2">
-          <div class="relative">
-            <img src="src/assets/bmw.jpg" class="w-full" />
-          </div>
-          <div class="flex align-items-center justify-content-between mt-3 mb-2">
-            <span class="text-900 font-medium text-xl">MARQUE + MODEL + PUISSANCE</span>
-          </div>
-          <DIV>
-            <span class="flex text-600 mt-3">KM /+ DATE SERVICE /+ TYPE CARBURANT</span>
-          </DIV>
-          <DIV>
-            <span class="flex text-600 mt-3">PRIX €</span>
-          </DIV>
-        </div>
-      </div>
-      <div class="col-12 md:col-6 lg:col-6 mb-3 lg:mb-0">
-        <div class="p-2">
-          <div class="relative">
-            <img src="src/assets/bmw.jpg" class="w-full" />
-          </div>
-          <div class="flex align-items-center justify-content-between mt-3 mb-2">
-            <span class="text-900 font-medium text-xl">MARQUE + MODEL + PUISSANCE</span>
-          </div>
-          <DIV>
-            <span class="flex text-600 mt-3">KM /+ DATE SERVICE /+ TYPE CARBURANT</span>
-          </DIV>
-          <DIV>
-            <span class="flex text-600 mt-3">PRIX €</span>
-          </DIV>
-        </div>
-      </div>
-      <div class="col-12 md:col-6 lg:col-6 mb-3 lg:mb-0">
-        <div class="p-2">
-          <div class="relative">
-            <img src="src/assets/bmw.jpg" class="w-full" />
-          </div>
-          <div class="flex align-items-center justify-content-between mt-3 mb-2">
-            <span class="text-900 font-medium text-xl">MARQUE + MODEL + PUISSANCE</span>
-          </div>
-          <DIV>
-            <span class="flex text-600 mt-3">KM /+ DATE SERVICE /+ TYPE CARBURANT</span>
-          </DIV>
-          <DIV>
-            <span class="flex text-600 mt-3">PRIX €</span>
-          </DIV>
-        </div>
-      </div>
+        </template>
+      </DataView>
     </div>
-  </div>
-</template>
+  </template>
 
-<script>
-// export default {
-//   name: "VehiculeList"
-// }
-// const vehicule = {
-//   id:'',
-//   marque:'',
-//   mise_circulation:'',
-//   kilometrage:'',
-//   description:'',
-//   modele:'',
-//   version:'',
-//   puissance:'',
-//   carburant:'',
-//   transmission:'',
-//   co2:'',
-//   couleur:'',
-//   prix:'',
-//   date_vente:'',
-//   photos:[]
-// }
+
+<script setup lang="ts">
+
+import { Vehicule } from "@/entities/Vehicule";
+import {ref} from "vue";
+// import {FilterMatchMode} from "primevue/api";
+import axios, {AxiosError} from "axios";
+import Filters from "@/components/Filters.vue";
+
+const selectedVehicules = ref();
+
+const vehicules = ref<Vehicule[] | null>(null);
+
+const vehiculesFiltres = ref<Vehicule[]>([]);
+
+
+const layout = ref('grid');
+const error = ref()
+axios
+    .get("http://localhost:8080/vehicule", {headers: {"Content-Type": "application/json"}})
+    .then((response: any) =>{
+
+      vehicules.value = response.data._embedded.vehicule ; console.log(vehicules.value)})
+    .catch((err: AxiosError) => error.value = err.message)
 </script>
 
 <style scoped>

@@ -1,28 +1,47 @@
 
 <template>
   <div class="card">
-    <Button @click="AddVehicules">ajouter un véhicule</Button>
     <div v-if="error">Ca marche pas</div>
     <div v-else-if ="!vehicules">chargement</div>
-
-    <DataView v-else :value="vehicules">
-      <template #list="slotProps">
-        salut
-        {{JSON.stringify(slotProps)}}
-        <div class="col-12">
-          <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
-<!--            <img class="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" :src="`https://primefaces.org/cdn/primevue/images/product/${slotProps.data.image}`" :alt="slotProps.data.name" />-->
-            <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
-              <div class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
-                <span class="text-2xl font-semibold">{{ slotProps.data.marque }}</span>
-<!--                <Button icon="pi pi-shopping-cart" rounded :disabled="slotProps.data.inventoryStatus === 'OUTOFSTOCK'"></Button>-->
-              </div>
+            <div v-else class="card">
+              <Toolbar class="mb-4">
+                <template #start>
+                  <Button label="Ajouter un véhicule" icon="pi pi-plus" severity="success" class="mr-2" @click="AddVehicules" />
+<!--                  <Button label="Delete" icon="pi pi-trash" severity="danger" @click="confirmDeleteSelected" :disabled="!selectedProducts || !selectedProducts.length" />-->
+                </template>
+              </Toolbar>
+            </div>
+    <div class="card">
+              <DataTable ref="dt" :value="vehicules" v-model:selection="selectedVehicules" dataKey="id"
+                         :paginator="true" :rows="10" :filters="filters"
+                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" :rowsPerPageOptions="[5,10,25]"
+                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products">
+                <template #header>
+                  <div class="flex flex-wrap gap-2 align-items-center justify-content-between">
+                    <h4 class="m-0">Véhicules en vente</h4>
+                    <span class="p-input-icon-left">
+                            <i class="pi pi-search" />
+                            <InputText v-model="filters['global'].value" placeholder="Rechercher..." />
+                        </span>
+                  </div>
+                </template>
+                <Column selectionMode="multiple" style="width: 3rem" :exportable="false"></Column>
+                <Column field="marque" header="Marque" sortable style="min-width:12rem">{{ slotProps.data.marque }}</Column>
+                <Column field="modele" header="Modèle" sortable style="min-width:12rem">{{slotProps.data.modele}}</Column>
+                <Column field="couleur" header="Couleur" sortable style="min-width:12rem">{{slotProps.data.couleur}}</Column>
+                <Column field="prix" header="Prix" sortable style="min-width:12rem">{{slotProps.data.prix}}</Column>
+                <Column field="kilometrage" header="Km" sortable style="min-width:12rem">{{slotProps.data.kilometrage}}</Column>
+                <Column field="transmission" header="Transmission" sortable style="min-width:12rem">{{slotProps.data.transmission}}</Column>
+                <Column field="co2" header="CO2" sortable style="min-width:12rem">{{slotProps.data.co2}}</Column>
+                <Column field="version" header="Version" sortable style="min-width:12rem">{{slotProps.data.version}}</Column>
+                <Column field="puissance" header="Puissance" sortable style="min-width:12rem">{{slotProps.data.puissance}}</Column>
+                <Column field="carburant" header="Carburant" sortable style="min-width:12rem">{{slotProps.data.carburant}}</Column>
+                <Column field="miseCirculation" header="Date de mise en circulatino" sortable style="min-width:12rem">{{slotProps.data.miseCirculation}}</Column>
+                <Column field="dateVente" header="Date de mise en vente" sortable style="min-width:12rem">{{slotProps.data.dateVente}}</Column>
+                <Column field="description" header="Description" sortable style="min-width:12rem">{{slotProps.data.description}}</Column>
+              </DataTable>
             </div>
           </div>
-        </div>
-      </template>
-    </DataView>
-  </div>
 </template>
 
 <script setup lang="ts">
@@ -30,11 +49,16 @@ import axios, {AxiosError} from "axios";
 import { Vehicule } from "@/entities/Vehicule";
 import {ref} from "vue";
 import {useRouter} from "vue-router";
-
+import {FilterMatchMode} from "primevue/api";
 const router = useRouter();
 const AddVehicules= () => {
   router.push('/ajoutvehicule')
 }
+
+const selectedVehicules = ref();
+const filters = ref({
+  'global': {value: null, matchMode: FilterMatchMode.CONTAINS},
+});
 
   const vehicules = ref<Vehicule[] | null>(null);
   const error = ref()

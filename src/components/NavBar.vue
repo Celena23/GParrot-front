@@ -26,7 +26,7 @@
           </a>
         </li>
       </ul>
-      <div class="flex justify-content-between lg:block border-top-1 lg:border-top-none surface-border py-3 lg:py-0 mt-3 lg:mt-0">
+      <div class="flex justify-content-between lg:block border-top-1 lg:border-top-none surface-bordeNavBar.vueNavBar.vuer py-3 lg:py-0 mt-3 lg:mt-0">
 <!--        <Button label="Login" class="p-button-text font-bold"></Button>-->
         <Button label="NOUS CONTACTER" class="ml-3 p-button-outlined font-bold"></Button>
       </div>
