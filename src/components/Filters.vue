@@ -1,6 +1,6 @@
 <template>
   <div class="card flex justify-content-center">
-    <Dropdown v-model="vehiculesFiltres" :options="marques" placeholder="choisir une marque" class="w-full md:w-14rem">{{slotProps}}</Dropdown>
+    <Dropdown v-model="vehiculesFiltres" :options="sortedMarques" placeholder="choisir une marque" class="w-full md:w-14rem">{{slotProps}}</Dropdown>
   </div>
 </template>
 
@@ -23,16 +23,20 @@ axios
       if (Array.isArray(responseData)) {
         vehicules.value = responseData;
         marques.value = responseData.map((vehicule) => vehicule.marque);
+        marques.value = marques.value.filter((marque, index) => marques.value.indexOf(marque) === index);
         vehiculesFiltres.value = vehicules.value;
       } else {
         vehicules.value = [];
         marques.value = [];
-        vehiculesFiltres.value = [];
+        vehiculesFiltres.value = vehicules.value;
       }
     })
 
     .catch((err: AxiosError) => error.value = err.message)
-
+const sortedMarques = ref<string[]>([]);
+watch(marques, () => {
+  sortedMarques.value = marques.value.slice().sort().map((marque) => marque.toUpperCase());
+});
 
 </script>
 

@@ -12,12 +12,12 @@ import Footer from "@/components/Footer.vue";
   <NavBar/>
   <main>
   <Hero/>
-  <VehiculeList/>
-  <div class="p-6 flex justify-content-center">
-    <RouterLink to="/Véhicules">
-  <Button label="TOUS NOS VEHICULES" icon="pi pi-arrow-up-right" iconPos="right" class="px-5 py-3 p-button-outlined font-bold w-full lg:w-auto white-space-nowrap" style="white-space: nowrap"></Button>
-    </RouterLink>
-  </div>
+<!--  <VehiculeList/>-->
+    <div class="p-6 flex justify-content-center">
+      <RouterLink to="/vehicules">
+        <Button label="TOUS NOS VEHICULES" icon="pi pi-arrow-up-right" iconPos="right" class="px-5 py-3 p-button-outlined font-bold w-full lg:w-auto white-space-nowrap" style="white-space: nowrap"></Button>
+      </RouterLink>
+    </div>
     <div class="p-6">
     <div class="border-2 border-black-alpha-90 surface-border border-round surface-card text-2xl line-height-4 px-6">
     <p>

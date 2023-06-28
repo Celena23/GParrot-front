@@ -4,6 +4,8 @@
       <div class="grid flex">
         <div class="col-12 md:col-6">
           <div class="text-white text-lg mb-4 flex flex-wrap" style="max-width: 290px">Garage Vincent PARROT</div>
+          <div class="text-white text-lg mb-4 flex flex-wrap" style="max-width: 290px">13 rue de la clef à molette</div>
+          <div class="text-white text-lg mb-4 flex flex-wrap" style="max-width: 290px">31000 TOULOUSE</div>
           <div class="text-white mb-3"><i class="pi pi-phone surface-800 border-round p-1 mr-2"></i>03 20 00 00 00</div>
 <!--          <div class="text-white mb-3"><i class="pi pi-inbox surface-800 border-round p-1 mr-2"></i><a :href="'mailto:san@antonio.net?subject=' +id Voiture + '&cc=' + cc + '&bcc=avocat@antonio.net&body=Bonjour" >contact@vparrot.com</a></div>-->
         </div>
