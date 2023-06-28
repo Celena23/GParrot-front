@@ -27,14 +27,19 @@
         </li>
       </ul>
       <div class="flex justify-content-between lg:block border-top-1 lg:border-top-none surface-bordeNavBar.vueNavBar.vuer py-3 lg:py-0 mt-3 lg:mt-0">
-<!--        <Button label="Login" class="p-button-text font-bold"></Button>-->
-        <Button label="NOUS CONTACTER" class="ml-3 p-button-outlined font-bold"></Button>
+        <Button label="NOUS CONTACTER" class="ml-3 p-button-outlined font-bold" @click="redirectToEmail">
+        </Button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
+const mailtoLink = ref("mailto:ce.piat@sources-alma.com?subject=Contact depuis votre site&body=");
+function redirectToEmail() {
+  window.location.href = mailtoLink.value;
+}
 </script>
 
 <style scoped>
