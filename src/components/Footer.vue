@@ -5,7 +5,7 @@
         <div class="col-12 md:col-6">
           <div class="text-white text-lg mb-4 flex flex-wrap" style="max-width: 290px">Garage Vincent PARROT</div>
           <div class="text-white mb-3"><i class="pi pi-phone surface-800 border-round p-1 mr-2"></i>03 20 00 00 00</div>
-          <div class="text-white mb-3"><i class="pi pi-inbox surface-800 border-round p-1 mr-2"></i>contact@vparrot.com</div>
+          <div class="text-white mb-3"><i class="pi pi-inbox surface-800 border-round p-1 mr-2"></i><a :href="'mailto:san@antonio.net?subject=' +id Voiture + '&cc=' + cc + '&bcc=avocat@antonio.net&body=Bonjour" >contact@vparrot.com</a></div>
         </div>
         <div class="col-12 md:col-6 text-gray-200 flex flex-column justify-content-start align-items-end">
           <div class="text-white font-bold line-height-3 mb-3">NOS HORAIRES D'OUVERTURES</div>

@@ -19,7 +19,7 @@ axios
     .get("http://localhost:8080/vehicule", {headers: {"Content-Type": "application/json"}})
     .then((response: any) =>{
       const responseData = response.data._embedded?.vehicule;
-      vehicules.value = response.data._embedded.vehicule ; console.log(vehicules.value);
+      vehicules.value = response.data._embedded.vehicule ;
       if (Array.isArray(responseData)) {
         vehicules.value = responseData;
         marques.value = responseData.map((vehicule) => vehicule.marque);

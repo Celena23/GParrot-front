@@ -29,6 +29,7 @@ import MultiSelect from 'primevue/multiselect';
 import Dropdown from 'primevue/dropdown';
 import TabView from 'primevue/tabview';
 import TabPanel from 'primevue/tabpanel';
+import FileUpload from 'primevue/fileupload';
 
 
 const app = createApp(App)
@@ -52,6 +53,7 @@ app.component("MultiSelect", MultiSelect)
 app.component("Dropdown", Dropdown)
 app.component("TabView", TabView)
 app.component("TabPanel", TabPanel)
+app.component("FileUpload", FileUpload)
 
 
 app.mount('#app')

@@ -8,7 +8,9 @@
           <div class="col-12 sm:col-12 md:12 lg:col-6 xl:col-6 p-6">
             <div class="p-4 border-1 surface-border cursor-pointer">
               <div class="p-4">
-                <img src="src/assets/bmw.jpg" class="w-full overflow-hidden"/>
+                <div v-if="slotProps.data.photos?.length > 0">
+                <img v-for="(photo, index) in slotProps.data.photos" :key="index" :src="photo.photo" class="w-full overflow-hidden" />
+                </div>
                 <div class="flex align-items-center justify-content-between mt-5 mb-3">
                   <span class="text-900 font-medium text-xl">{{ slotProps.data.marque }} {{ slotProps.data.modele }}</span>
                 </div>
@@ -26,8 +28,7 @@
 <script setup lang="ts">
 
 import { Vehicule } from "@/entities/Vehicule";
-import {ref} from "vue";
-// import {FilterMatchMode} from "primevue/api";
+import {onMounted, ref} from "vue";
 import axios, {AxiosError} from "axios";
 import Filters from "@/components/Filters.vue";
 
@@ -40,12 +41,16 @@ const vehiculesFiltres = ref<Vehicule[]>([]);
 
 const layout = ref('grid');
 const error = ref()
-axios
-    .get("http://localhost:8080/vehicule", {headers: {"Content-Type": "application/json"}})
-    .then((response: any) =>{
+onMounted(async ()=>{
 
-      vehicules.value = response.data._embedded.vehicule ; console.log(vehicules.value)})
-    .catch((err: AxiosError) => error.value = err.message)
+  const allVehicules =
+      (await (axios
+          .get("http://localhost:8080/vehicule", {headers: {"Content-Type": "application/json"}}))).data._embedded.vehicule;
+      for (let i=0; i<allVehicules.length ; i++) {
+        allVehicules[i].photos = (await axios
+            .get("http://localhost:8080/vehicule/" + allVehicules[i].id + "/photo", {headers: {"Content-Type": "application/json"}})).data._embedded.photo
+      }vehicules.value = allVehicules; console.log(vehicules.value)
+})
 </script>
 
 <style scoped>

@@ -76,18 +76,27 @@
           <div v-if="v$.description.$error" class="errorMessage">{{errorMessage}}</div>
         </div>
         <div class="field mb-4 col-12 md:col-12">
-          <label  class="font-medium text-900 font-medium">Photos</label>
-          <FileUpload v-model="vehicule.photos"/>
-        </div>
+          <FileUpload
+              ref="uploadForm"
+              name="demo[]"
+              accept="image/*"
+              :maxFileSize="1000000"
+              :show-cancel-button="false"
+              :show-upload-button="false"
+              :show-c-button="false"
+              choose-label="Ajouter"
+          >
+            <template #empty>
+              <div class="flex align-items-center justify-content-center flex-column">
+                <i class="pi pi-cloud-upload border-2 border-circle p-5 text-8xl text-400 border-400" />
+                <p class="mt-4 mb-0">Glisser vos photos ici pour les importer</p>
+              </div>
+            </template>
+          </FileUpload>
 
-<!--          <Dropdown id="country2 v-model="selectedCountry2" :options="countries" optionLabel="name" :filter="true" filterBy="name" :showClear="true" placeholder="Select a Country">-->
-<!--          <template #option="slotProps">-->
-<!--            <div class="flex align-items-center">-->
-<!--              <img src="images/blocks/flag/flag_placeholder.png" :class="'mr-2 flag flag-' + slotProps.option.code.toLowerCase()" style="width:18px"/>-->
-<!--              <div>{{slotProps.option.name}}</div>-->
-<!--            </div>-->
-<!--          </template>-->
-<!--          </Dropdown>-->
+<!--          <label  class="font-medium text-900 font-medium">Photos</label>-->
+<!--          <FileUpload v-model="vehicule.photos"/>-->
+        </div>
 
         <div class="surface-border border-top-1 opacity-50 mb-3 col-12"></div>
         <div class="col-12">
@@ -108,6 +117,7 @@ import {required} from "@vuelidate/validators";
 
 import axios, { AxiosError, AxiosResponse } from "axios";
 import {useRouter} from "vue-router";
+import UploadView from "@/views/UploadView.vue";
 
 const vehicule = reactive({
   marque:'',
@@ -147,9 +157,11 @@ const v$ = useVuelidate(rules, vehicule)
 let error = ref<string | undefined>();
 let errorMessage = 'Ce champ est obligatoire';
 const router = useRouter();
+const uploadForm = ref<any>();
 
 
 const onClickSave = async () => {
+
   error.value = undefined
   const isValid = await v$.value.$validate()
   if (!isValid) error.value = 'Assurez vous que tous les champs obligatoires soient renseignés'
@@ -157,11 +169,44 @@ const onClickSave = async () => {
 
     axios
         .post("http://localhost:8080/vehicule", vehicule, {headers: {"Content-Type": "application/json"}})
-        .then(() => router.push('/AdministrationParrot'))
+        .then((response: any) => { console.log(response)
+            router.push('/AdministrationParrot')
+          savePhotos(response.data.id)})
         .catch((err: AxiosError) => error.value = err.message)
   }
 }
+const savePhotos = async (vehiculeId: number) => {
+  console.log(vehiculeId)
+  // Lecture de l'ensemble des fichiers
+  for (const file of uploadForm.value?.files) {
+    // 1. On met la photo en base 64 pour la sauvegarder
+    const photoBase64 = await convertToBase64(file);
 
+    // 2. On crée l'objet photo avec les informations pour à sauvegarder
+    const photo = { vehicule: "/vehicule/"+vehiculeId, photo: photoBase64 };
+
+    // 3. On effectue la sauvegarde dans la BDD.
+    await axios.post("http://localhost:8080/photo", photo, { headers: { "Content-Type": "application/json"}});
+
+    //4. On effectue les corrections car peu de chances que ça marche du premier coup :)
+  }
+}
+
+/**
+ * Convertit un fichier en base64
+ * @param file Fichier à convertir
+ * @return Fichier en base64
+ */
+const convertToBase64 = async (file: File): Promise<unknown> => {
+  return new Promise((resolve) => {
+    // Permet de lire le fichier
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    // Permet la conversion en base64
+    reader.onload = () => resolve(reader.result);
+  });
+}
 </script>
 
 <style>
