@@ -11,6 +11,7 @@
     --primary-color-hover : #4b4d54;
     --primary-color-text:#ffffff;
     --font-family:-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+    font-family: 'Belanosima', sans-serif;
     --surface-0: #ffffff;
     --surface-50: #f9fafb;
     --surface-100: #f8f9fa;
@@ -46,14 +47,17 @@
     --highlight-bg: var(--primary-color);
     --highlight-text-color: #ffffff;
     color-scheme: light;
+
 }
+
 
 * {
     box-sizing: border-box;
+
 }
 
 .p-component {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    /*font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";*/
     font-size: 1rem;
     font-weight: normal;
 }

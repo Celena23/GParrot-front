@@ -1,80 +1,74 @@
 <template>
 
-  <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
+  <div class="surface-section px-4 py-2 md:px-6 lg:px-8">
     <div class="grid mb-7">
       <div class="col-12 lg:col-6">
         <div class="flex">
-          <div class="flex flex-column w-2 justify-content-between">
-            <img v-for="(image, i) of images2" :key="image" :src="'images/blocks/ecommerce/productoverview/' + image" class="w-full cursor-pointer border-2 border-round border-transparent transition-colors transition-duration-150"
-                 :class="{'border-primary': selectedImageIndex2 === i}" @click="selectedImageIndex2 = i"/>
-          </div>
           <div class="pl-3 w-10">
-            <img src="src/assets/bmw.jpg" class="w-full" />
+<!--            <div v-if="vehicule.photos && vehicule.photos.length > 0">-->
+<!--            <Carousel :value="vehicule.photos" :responsiveOptions="responsiveOptions" :numVisible="3" containerStyle="max-width: 640px">-->
+<!--              <template #item={item}>-->
+<!--                <img :src="item.photo" style="width: 100%" />-->
+<!--              </template>-->
+<!--              <template #thumbnail={item}>-->
+<!--                <img :src="item.photo" />-->
+<!--              </template>-->
+<!--            </Carousel>-->
+<!--            </div>-->
+
+
+            <div v-if="vehicule.photos && vehicule.photos.length > 0">
+              <img v-for="(photo, index) in vehicule.photos" :key="index" :src="photo.photo" class="w-full overflow-hidden" />
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-12 lg:col-6 py-3 lg:pl-6">
-        <div class="flex align-items-center text-3xl font-medium text-900 mb-4">marque modele</div>
-        <div class="flex align-items-center text-xl font-medium text-900 mb-4">kilometre</div>
-        <div class="flex align-items-center text-xl font-medium text-900 mb-4">carburant</div>
-        <div class="flex align-items-center justify-content-between mb-5">
-          <span class="text-900 font-medium text-2xl block">Prix €</span>
+      <div class="col-12 lg:col-6 py-3 lg:pl-6" v-if="vehicule">
+        <div class="flex align-items-center text-6xl font-medium text-900 mb-4">{{ vehicule.marque }} {{ vehicule.modele }}</div>
+                        <div class="flex align-items-center justify-content-between mb-5">
+                          <span class="text-900 font-medium text-2xl block">{{ vehicule.prix }} €</span>
+                        </div>
+        <div class="flex justify-content-between lg:block border-top-1 lg:border-top-none surface-border py-3 lg:py-0 mt-3 lg:mt-0">
+          <Button label="ENVOYER UN EMAIL" class="ml-3 p-button-outlined font-bold" @click="redirectToEmail">
+          </Button>
         </div>
+        <ul class="list-none p-0 m-0">
+          <li class="flex align-items-center py-3 px-2  flex-wrap">
+            <div class="text-500 w-6 md:w-2 font-medium">Version</div>
+            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{vehicule.version}}</div>
+          </li>
+          <li class="flex align-items-center py-3 px-2  flex-wrap">
+            <div class="text-500 w-6 md:w-2 font-medium">Couleur</div>
+            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{vehicule.couleur}}</div>
+          </li>
+          <li class="flex align-items-center py-3 px-2  flex-wrap">
+            <div class="text-500 w-6 md:w-2 font-medium">Kilometrage</div>
+            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{vehicule.kilometrage}} km</div>
+          </li>
+          <li class="flex align-items-center py-3 px-2  flex-wrap">
+            <div class="text-500 w-6 md:w-2 font-medium">Carburant</div>
+            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{vehicule.carburant}}</div>
+          </li>
+          <li class="flex align-items-center py-3 px-2  flex-wrap">
+            <div class="text-500 w-6 md:w-2 font-medium">Transmission</div>
+            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{vehicule.transmission}}</div>
+          </li>
+          <li class="flex align-items-center py-3 px-2  flex-wrap">
+            <div class="text-500 w-6 md:w-2 font-medium">Puissance</div>
+            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{vehicule.puissance}}</div>
+          </li>
+          <li class="flex align-items-center py-3 px-2  flex-wrap">
+            <div class="text-500 w-6 md:w-2 font-medium">Emission de CO2</div>
+            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{vehicule.co2}}</div>
+          </li>
+          <li class="flex align-items-center py-3 px-2 flex-wrap">
+            <div class="text-500 w-6 md:w-2 font-medium">Date de mise en circulation</div>
+            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ miseCirculation  }}</div>
+          </li>
+        </ul>
       </div>
+      <div class="flex align-items-center text-xl font-light text-900 mb-4">{{ vehicule.description }}</div>
     </div>
-
-    <TabView>
-      <TabPanel header="Details">
-        <div class="text-900 font-medium text-3xl mb-4 mt-2">Notre avis</div>
-        <p class="line-height-3 text-700 p-0 mx-0 mt-0 mb-4">Description</p>
-
-
-      </TabPanel>
-      <TabPanel header="Reviews">
-        <div class="text-900 font-medium text-3xl mb-4 mt-2">Customer Reviews</div>
-
-        <div class="grid">
-          <div class="col-12 lg:col-4">
-            <span class="text-900 block font-medium mb-3">Highlights</span>
-            <ul class="py-0 pl-3 m-0 text-700 mb-3">
-              <li class="mb-2">Vulputate sapien nec.</li>
-              <li class="mb-2">Purus gravida quis blandit.</li>
-              <li class="mb-2">Nisi quis eleifend quam adipiscing.</li>
-              <li>Imperdiet proin fermentum.</li>
-            </ul>
-          </div>
-          <div class="col-12 lg:col-4">
-            <span class="text-900 block font-medium mb-3">Size and Fit</span>
-            <ul class="list-none p-0 m-0 text-700 mb-4">
-              <li class="mb-3"><span class="font-medium">Leo vel:</span> Egestas congue.</li>
-              <li class="mb-3"><span class="font-medium">Sociis natoque:</span> Parturient montes nascetur.</li>
-              <li><span class="font-medium">Suspendisse in:</span> Purus sit amet volutpat.</li>
-            </ul>
-          </div>
-          <div class="col-12 lg:col-4">
-            <span class="text-900 block font-medium mb-3">Material & Care</span>
-            <ul class="p-0 m-0 text-700 flex flex-wrap flex-column xl:flex-row">
-              <li class="flex align-items-center white-space-nowrap w-10rem block mr-2 mb-3">
-                <i class="pi pi-sun mr-2"></i>
-                <span>Not dryer safe</span>
-              </li>
-              <li class="flex align-items-center white-space-nowrap w-10rem block mb-3">
-                <i class="pi pi-times-circle mr-2"></i>
-                <span>No chemical wash</span>
-              </li>
-              <li class="flex align-items-center white-space-nowrap w-10rem block mb-3 mr-2">
-                <i class="pi pi-sliders-h mr-2"></i>
-                <span>Iron medium heat</span>
-              </li>
-              <li class="flex align-items-center white-space-nowrap w-10rem block mb-3">
-                <i class="pi pi-minus-circle mr-2"></i>
-                <span>Dry flat</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </TabPanel>
-    </TabView>
   </div>
 </template>
 
@@ -82,25 +76,48 @@
 
 import { Vehicule } from "@/entities/Vehicule";
 import {ref} from "vue";
-// import {FilterMatchMode} from "primevue/api";
-import axios, {AxiosError} from "axios";
-import Filters from "@/components/Filters.vue";
 
-const selectedVehicules = ref();
+const props = defineProps({
+  vehicule: {
+    type: Object as () => Vehicule | null,
+    required: true
+  }
+});
+const mailtoLink = ref(`mailto:ce.piat@sources-alma.com?subject=${encodeURIComponent(props.vehicule?.marque || '')} -  ${encodeURIComponent(props.vehicule?.modele?.toString() || '')}-  ${encodeURIComponent(props.vehicule?.prix?.toString() || '')}€&body=`);// const mailtoLink = ref(`mailto:ce.piat@sources-alma.com?subject=${encodeURIComponent(props.vehicule?.marque || '')}&body=`);
 
-const vehicules = ref<Vehicule[] | null>(null);
+let miseCirculation = "";
+if (props.vehicule?.miseCirculation) {
+   const dateElements = props.vehicule?.miseCirculation.split("-");
+   miseCirculation = dateElements[2] + "/" +  dateElements[1] + "/" + dateElements[0];
+}
 
-const vehiculesFiltres = ref<Vehicule[]>([]);
-
+function redirectToEmail() {
+  window.location.href = mailtoLink.value;
+}
 
 const layout = ref('grid');
 const error = ref()
-axios
-    .get("http://localhost:8080/vehicule", {headers: {"Content-Type": "application/json"}})
-    .then((response: any) =>{
-
-      vehicules.value = response.data._embedded.vehicule ; console.log(vehicules.value)})
-    .catch((err: AxiosError) => error.value = err.message)
+// axios
+//     .get("http://localhost:8080/vehicule", {headers: {"Content-Type": "application/json"}})
+//     .then((response: any) =>{
+//
+//       vehicules.value = response.data._embedded.vehicule ; console.log(vehicules.value)})
+//
+// vehicules.value.photos = (await axios
+//     .get("http://localhost:8080/vehicule/" + vehicules.value.id + "/photo", {headers: {"Content-Type": "application/json"}})).data._embedded.photo
+//     .catch((err: AxiosError) => error.value = err.message)
+const responsiveOptions = [
+  {
+    breakpoint: '1024px',
+    numVisible: 2,
+    numScroll: 2
+  },
+  {
+    breakpoint: '768px',
+    numVisible: 1,
+    numScroll: 1
+  }
+];
 
 </script>
 

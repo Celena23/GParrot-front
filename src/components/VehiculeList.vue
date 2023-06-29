@@ -6,7 +6,7 @@
         </template>
         <template #grid="slotProps">
           <div class="col-12 sm:col-12 md:12 lg:col-6 xl:col-6 p-6">
-            <div class="p-4 border-1 surface-border cursor-pointer">
+            <div class="p-4 border-1 surface-border cursor-pointer" @click="showDialog(slotProps.data)">
               <div class="p-4">
                 <div v-if="slotProps.data.photos?.length > 0">
                 <img v-for="(photo, index) in slotProps.data.photos" :key="index" :src="photo.photo" class="w-full overflow-hidden" />
@@ -22,24 +22,29 @@
         </template>
       </DataView>
     </div>
+
+      <Dialog v-model:visible="displayDialog" :modal="true" :breakpoints="{'960px': '75vw', '640px': '100vw'}" class="min-w-screen min-h-screen">
+        <VehiculeDetails :vehicule="selectedVehicule" />
+      </Dialog>
   </template>
 
-
 <script setup lang="ts">
-
 import { Vehicule } from "@/entities/Vehicule";
 import {onMounted, ref} from "vue";
 import axios, {AxiosError} from "axios";
 import Filters from "@/components/Filters.vue";
+import VehiculeDetails from "@/components/VehiculeDetails.vue";
+import Dialog from "primevue/dialog";
 
 const selectedVehicules = ref();
-
 const vehicules = ref<Vehicule[] | null>(null);
 
 const vehiculesFiltres = ref<Vehicule[]>([]);
+const selectedVehicule = ref<Vehicule | null>(null);
 
 
 const layout = ref('grid');
+const displayDialog = ref(false);
 const error = ref()
 onMounted(async ()=>{
 
@@ -51,6 +56,13 @@ onMounted(async ()=>{
             .get("http://localhost:8080/vehicule/" + allVehicules[i].id + "/photo", {headers: {"Content-Type": "application/json"}})).data._embedded.photo
       }vehicules.value = allVehicules; console.log(vehicules.value)
 })
+
+function showDialog(vehicule: Vehicule) {
+  selectedVehicule.value = vehicule;
+  displayDialog.value = true;
+}
+
+
 </script>
 
 <style scoped>

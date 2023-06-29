@@ -3,6 +3,8 @@
 import VehiculeForm from "@/components/VehiculeForm.vue";
 import DataTableVehicule from "@/components/DataTableVehicule.vue";
 import Contact from "@/components/Contact.vue";
+import EmployeForm from "@/components/EmployeForm.vue";
+import NavBarAdmin from "@/components/NavBarAdmin.vue";
 </script>
 
 <template>
@@ -14,6 +16,8 @@ import Contact from "@/components/Contact.vue";
 <!--    data table avec possibilité de modifier-->
 <!--    bouton ajouter un utilisateur-->
 <!--  <Contact/>-->
+<!--  <NavBarAdmin/>-->
+<!--  <EmployeForm/>-->
   <DataTableVehicule/>
 <!--  <VehiculeForm/>-->
 </template>

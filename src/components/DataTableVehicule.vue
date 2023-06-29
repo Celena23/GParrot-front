@@ -1,16 +1,17 @@
 
 <template>
+  <NavBarAdmin/>
   <div class="card">
     <div v-if="error">Ca marche pas</div>
     <div v-else-if ="!vehicules">chargement</div>
-            <div v-else class="card">
-              <Toolbar class="mb-4">
-                <template #start>
-                  <Button label="Ajouter un véhicule" icon="pi pi-plus" severity="success" class="mr-2" @click="AddVehicules" />
-<!--                  <Button label="Delete" icon="pi pi-trash" severity="danger" @click="confirmDeleteSelected" :disabled="!selectedProducts || !selectedProducts.length" />-->
-                </template>
-              </Toolbar>
-            </div>
+<!--            <div v-else class="card">-->
+<!--              <Toolbar class="mb-4">-->
+<!--                <template #start>-->
+<!--                  <Button label="Ajouter un véhicule" icon="pi pi-plus" severity="success" class="mr-2" @click="AddVehicules" />-->
+<!--&lt;!&ndash;                  <Button label="Delete" icon="pi pi-trash" severity="danger" @click="confirmDeleteSelected" :disabled="!selectedProducts || !selectedProducts.length" />&ndash;&gt;-->
+<!--                </template>-->
+<!--              </Toolbar>-->
+<!--            </div>-->
     <div class="card">
               <DataTable ref="dt" :value="vehicules" v-model:selection="selectedVehicules" dataKey="id"
                          :paginator="true" :rows="10" :filters="filters"
@@ -50,6 +51,7 @@ import { Vehicule } from "@/entities/Vehicule";
 import {ref} from "vue";
 import {useRouter} from "vue-router";
 import {FilterMatchMode} from "primevue/api";
+import NavBarAdmin from "@/components/NavBarAdmin.vue";
 const router = useRouter();
 const AddVehicules= () => {
   router.push('/ajoutvehicule')

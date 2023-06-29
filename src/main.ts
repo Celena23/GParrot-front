@@ -30,6 +30,9 @@ import Dropdown from 'primevue/dropdown';
 import TabView from 'primevue/tabview';
 import TabPanel from 'primevue/tabpanel';
 import FileUpload from 'primevue/fileupload';
+import Dialog from 'primevue/dialog';
+import Galleria from 'primevue/galleria';
+import Carousel from "primevue/carousel";
 
 
 const app = createApp(App)
@@ -54,6 +57,8 @@ app.component("Dropdown", Dropdown)
 app.component("TabView", TabView)
 app.component("TabPanel", TabPanel)
 app.component("FileUpload", FileUpload)
-
+app.component("Dialog", Dialog)
+app.component("Carousel", Carousel)
+app.component("Galleria", Galleria)
 
 app.mount('#app')

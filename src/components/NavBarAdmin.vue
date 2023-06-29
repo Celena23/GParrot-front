@@ -8,38 +8,42 @@
     <div class="align-items-center flex-grow-1 justify-content-between hidden lg:flex absolute lg:static w-full surface-overlay left-0 top-100 px-6 lg:px-0 z-2 shadow-2 lg:shadow-none">
       <section></section>
       <ul class="list-none p-0 m-0 flex lg:align-items-center text-900 select-none flex-column lg:flex-row cursor-pointer">
-        <RouterLink to="/vehicules">
+        <RouterLink to="/ajoutvehicule">
         <li>
           <a v-ripple class="flex px-0 lg:px-5 py-3 hover:text-blue-600 font-bold transition-colors transition-duration-150 p-ripple">
-            <span>NOS VEHICULES</span>
+            <span>AJOUTER UN VEHICULE</span>
           </a>
         </li>
         </RouterLink>
         <li>
           <a v-ripple class="flex px-0 lg:px-5 py-3 hover:text-blue-600 font-bold transition-colors transition-duration-150 p-ripple">
-            <span>NOS SERVICES</span>
+            <span>GESTION DES TEMOIGNAGES</span>
           </a>
         </li>
         <li>
           <a v-ripple class="flex px-0 lg:px-5 py-3 hover:text-blue-600 font-bold transition-colors transition-duration-150 p-ripple">
-            <span>TEMOIGNAGES</span>
+            <span>GESTION DES SERVICES</span>
           </a>
         </li>
+        <li>
+          <a v-ripple class="flex px-0 lg:px-5 py-3 hover:text-blue-600 font-bold transition-colors transition-duration-150 p-ripple">
+            <span>GESTION DES HORAIRES</span>
+          </a>
+        </li>
+        <RouterLink to="/ajoutemploye">
+        <li>
+          <a v-ripple class="flex px-0 lg:px-5 py-3 hover:text-blue-600 font-bold transition-colors transition-duration-150 p-ripple">
+            <span>GESTION DES ACCES</span>
+          </a>
+        </li>
+        </RouterLink>
       </ul>
-      <div class="flex justify-content-between lg:block border-top-1 lg:border-top-none surface-border py-3 lg:py-0 mt-3 lg:mt-0">
-        <Button label="NOUS CONTACTER" class="ml-3 p-button-outlined font-bold" @click="redirectToEmail">
-        </Button>
-      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-const mailtoLink = ref("mailto:ce.piat@sources-alma.com?subject=Contact depuis votre site&body=");
-function redirectToEmail() {
-  window.location.href = mailtoLink.value;
-}
+
 </script>
 
 <style scoped>

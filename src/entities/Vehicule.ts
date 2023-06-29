@@ -1,7 +1,7 @@
 export type Vehicule = {
     id?: number ;
     marque?: string ;
-    miseCirculation?: Date ;
+    miseCirculation?: string ;
     kilometrage?: number ;
     description?: string ;
     modele?: string ;
