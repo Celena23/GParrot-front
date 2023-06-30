@@ -3,25 +3,16 @@
   <div class="surface-section px-4 py-2 md:px-6 lg:px-8">
     <div class="grid mb-7">
       <div class="col-12 lg:col-6">
-        <div class="flex">
-          <div class="pl-3 w-10">
-<!--            <div v-if="vehicule.photos && vehicule.photos.length > 0">-->
-<!--            <Carousel :value="vehicule.photos" :responsiveOptions="responsiveOptions" :numVisible="3" containerStyle="max-width: 640px">-->
-<!--              <template #item={item}>-->
-<!--                <img :src="item.photo" style="width: 100%" />-->
-<!--              </template>-->
-<!--              <template #thumbnail={item}>-->
-<!--                <img :src="item.photo" />-->
-<!--              </template>-->
-<!--            </Carousel>-->
-<!--            </div>-->
-
-
             <div v-if="vehicule.photos && vehicule.photos.length > 0">
-              <img v-for="(photo, index) in vehicule.photos" :key="index" :src="photo.photo" class="w-full overflow-hidden" />
+            <Galleria class="border-1" :value="vehicule.photos" :responsiveOptions="responsiveOptions" :numVisible="5" containerStyle="max-width: 640px">
+              <template #item="slotProps">
+                <img :src="slotProps.item.photo" style="width: 100%" />
+              </template>
+              <template #thumbnail="slotProps">
+                <img :src="slotProps.item.photo" style="max-width: 50px"  />
+              </template>
+            </Galleria>
             </div>
-          </div>
-        </div>
       </div>
       <div class="col-12 lg:col-6 py-3 lg:pl-6" v-if="vehicule">
         <div class="flex align-items-center text-6xl font-medium text-900 mb-4">{{ vehicule.marque }} {{ vehicule.modele }}</div>
@@ -106,18 +97,20 @@ const error = ref()
 // vehicules.value.photos = (await axios
 //     .get("http://localhost:8080/vehicule/" + vehicules.value.id + "/photo", {headers: {"Content-Type": "application/json"}})).data._embedded.photo
 //     .catch((err: AxiosError) => error.value = err.message)
-const responsiveOptions = [
+const responsiveOptions = ref([
   {
-    breakpoint: '1024px',
-    numVisible: 2,
-    numScroll: 2
+    breakpoint: '991px',
+    numVisible: 4
   },
   {
-    breakpoint: '768px',
-    numVisible: 1,
-    numScroll: 1
+    breakpoint: '767px',
+    numVisible: 3
+  },
+  {
+    breakpoint: '575px',
+    numVisible: 1
   }
-];
+]);
 
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="card flex justify-content-center">
-    <Dropdown v-model="vehiculesFiltres" :options="sortedMarques" placeholder="choisir une marque" class="w-full md:w-14rem">{{slotProps}}</Dropdown>
+    <Dropdown v-model="selectedVehicules" :options="sortedMarques" placeholder="choisir une marque" class="w-full md:w-14rem" @change="filterMarque($event)">{{slotProps}}</Dropdown>
   </div>
 </template>
 
@@ -8,11 +8,12 @@
 import { Vehicule } from "@/entities/Vehicule";
 import {ref, watch} from "vue";
 import axios, {AxiosError} from "axios";
-const selectedVehicules = ref();
+
 
 const vehicules = ref<Vehicule[] | null>(null);
 const marques = ref<string[]>([]);
-const vehiculesFiltres = ref();
+const vehiculesFiltres = ref<Vehicule[]>([]);
+const sortedMarques = ref<string[]>([]);
 
 const error = ref()
 axios
@@ -30,13 +31,17 @@ axios
         marques.value = [];
         vehiculesFiltres.value = vehicules.value;
       }
+      sortedMarques.value = marques.value.slice().sort((a,b)=>a.localeCompare(b)).map((marque) => marque.toUpperCase());
+      sortedMarques.value.unshift("Toutes les marques")
     })
-
     .catch((err: AxiosError) => error.value = err.message)
-const sortedMarques = ref<string[]>([]);
-watch(marques, () => {
-  sortedMarques.value = marques.value.slice().sort().map((marque) => marque.toUpperCase());
-});
+
+
+const defineEmit = defineEmits<{(e:'filter', fields:any)}> ()
+const filterMarque = (event:any) => {
+  defineEmit('filter', {type : 'marque', value:event.value})
+}
+
 
 </script>
 

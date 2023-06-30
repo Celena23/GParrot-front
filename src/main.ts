@@ -33,6 +33,9 @@ import FileUpload from 'primevue/fileupload';
 import Dialog from 'primevue/dialog';
 import Galleria from 'primevue/galleria';
 import Carousel from "primevue/carousel";
+import VueDisqus from 'vue-disqus'
+import Textarea from 'primevue/textarea';
+import InputSwitch from 'primevue/inputswitch';
 
 
 const app = createApp(App)
@@ -40,6 +43,7 @@ app.use(Primevue)
 app.use(createPinia())
 app.use(router)
 app.use(ToastService)
+app.use(VueDisqus, { shortname: 'piatce' })
 app.component("InputText", InputText)
 app.component("Button", Button)
 app.component("Textarea", Textarea)
@@ -60,5 +64,7 @@ app.component("FileUpload", FileUpload)
 app.component("Dialog", Dialog)
 app.component("Carousel", Carousel)
 app.component("Galleria", Galleria)
+app.component("Textara", Textarea)
+app.component("InputSwitch", InputSwitch)
 
 app.mount('#app')

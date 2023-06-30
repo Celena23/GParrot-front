@@ -1,17 +1,19 @@
 <template>
+
   <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
     <div class="text-center mb-5">
       <img src="src/assets/LogoParrot.svg" alt="Logo V Parrot" height="50" class="mb-3">
       <div class="text-900 text-3xl font-medium mb-3">Garage PARROT</div>
       <span class="text-600 font-medium line-height-3">Bienvenue</span>
     </div>
-
+  <Message v-if="error">Accès refusé</Message>
     <div>
+
       <label for="identifier" class="block text-900 font-medium mb-2">Email</label>
-      <InputText id="identifier" type="text" class="w-full mb-3" />
+      <InputText v-model="identifier" type="text" class="w-full mb-3" />
 
       <label for="password" class="block text-900 font-medium mb-2">Mot de passe</label>
-      <InputText id="password" type="password" class="w-full mb-3" />
+      <InputText v-model="password" type="password" class="w-full mb-3" />
 
 <!--      <div class="flex align-items-center justify-content-between mb-6">-->
 <!--        <div class="flex align-items-center">-->
@@ -29,35 +31,29 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import axios, {AxiosError} from "axios";
-import {Vehicule} from "@/entities/Vehicule";
-import {Employe} from "@/entities/Employe";
+import router from "@/router";
 
 
-const employes = ref<Employe[] | null>(null);
-const error = ref()
+const error = ref(false)
 const identifier= ref()
 const password = ref()
-const checkIdPassword = ref(false)
 
-// Fonction de vérification des identifiants
 const login = () => {
-  // Vérifier si l'identifiant et le mot de passe sont corrects
-  if (identifier.value === employes.value.identifier && password.value === employes.value.password) {
-    // Accéder au site ou effectuer une action appropriée
-    console.log("Identifiants corrects. Accès autorisé.");
-  } else {
-    // Afficher un message d'erreur ou effectuer une action appropriée
-    console.log("Identifiants incorrects. Accès refusé.");
-  }
+  error.value = false
+  axios
+      .get("http://localhost:8080/employe/search/existsByIdentifierAndPassword?identifier="+ identifier.value + "&password=" + password.value,{headers: {"Content-Type": "application/json"}})
+      .then((result)=> {
+        console.log(result)
+        if (result.data == true) {
+          console.log("ca marche ?")
+          router.push('/AdministrationParrot')
+        }
+        else {
+          error.value = true
+        }
+      })
 };
 
-
-
-axios
-    .get("http://localhost:8080/employe", {headers: {"Content-Type": "application/json"}})
-    .then((response: any) =>{
-      employes.value = response.data._embedded.employe ; console.log(employes.value)})
-    .catch((err: AxiosError) => error.value = err.message)
 </script>
 
 

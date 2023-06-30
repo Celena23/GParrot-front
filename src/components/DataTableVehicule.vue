@@ -2,7 +2,7 @@
 <template>
   <NavBarAdmin/>
   <div class="card">
-    <div v-if="error">Ca marche pas</div>
+    <div v-if="error">Aucun véhicule disponible</div>
     <div v-else-if ="!vehicules">chargement</div>
 <!--            <div v-else class="card">-->
 <!--              <Toolbar class="mb-4">-->
@@ -70,4 +70,5 @@ const filters = ref({
 
        vehicules.value = response.data._embedded.vehicule ; console.log(vehicules.value)})
       .catch((err: AxiosError) => error.value = err.message)
+
 </script>

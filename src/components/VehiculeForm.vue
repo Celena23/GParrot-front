@@ -102,7 +102,7 @@
         <div class="col-12">
           <Button label="Sauvegarder et mettre en ligne" class="w-auto mt-3 @click" @click="onClickSave"></Button>
           <RouterLink to="/AdministrationParrot">
-            <Button label="Annuler" class="w-auto mt-3"></Button>
+            <Button label="Annuler" class="w-auto mt-3 ml-3"></Button>
           </RouterLink>
         </div>
       </div>

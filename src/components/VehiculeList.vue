@@ -1,15 +1,21 @@
   <template>
     <div class="card">
-      <DataView ref="dt" :value="vehicules" v-model:selection="selectedVehicules" :layout="layout" dataKey="id">
+      <DataView ref="dt" :value="vehiculesFiltres" v-model:selection="selectedVehicules" :layout="layout" dataKey="id">
         <template #header>
-          <Filters/>
+          <Filters @filter="filterVehicule"/>
         </template>
         <template #grid="slotProps">
           <div class="col-12 sm:col-12 md:12 lg:col-6 xl:col-6 p-6">
+
+<!--            <div v-for="(vehicule, index) in vehiculesFiltres" :key="index">-->
+<!--              &lt;!&ndash; Display the filtered vehicle data here &ndash;&gt;-->
+<!--              {{ vehicule.marque }} - {{ vehicule.modele }}-->
+<!--            </div>-->
+
             <div class="p-4 border-1 surface-border cursor-pointer" @click="showDialog(slotProps.data)">
               <div class="p-4">
                 <div v-if="slotProps.data.photos?.length > 0">
-                <img v-for="(photo, index) in slotProps.data.photos" :key="index" :src="photo.photo" class="w-full overflow-hidden" />
+                <img :src="slotProps.data.photos[0].photo" class="w-full overflow-hidden" />
                 </div>
                 <div class="flex align-items-center justify-content-between mt-5 mb-3">
                   <span class="text-900 font-medium text-xl">{{ slotProps.data.marque }} {{ slotProps.data.modele }}</span>
@@ -35,13 +41,26 @@ import axios, {AxiosError} from "axios";
 import Filters from "@/components/Filters.vue";
 import VehiculeDetails from "@/components/VehiculeDetails.vue";
 import Dialog from "primevue/dialog";
+import {FilterService} from "primevue/api";
+import filter = FilterService.filter;
 
 const selectedVehicules = ref();
 const vehicules = ref<Vehicule[] | null>(null);
 
 const vehiculesFiltres = ref<Vehicule[]>([]);
 const selectedVehicule = ref<Vehicule | null>(null);
-
+const filterVehicule = (filter:any) => {
+  console.log(filter)
+  vehiculesFiltres.value = vehicules.value?.filter((vehicule) => {
+    if (filter.type == 'marque') {
+      if (filter.value == 'Toutes les marques') {
+        return true;
+      }
+      return vehicule.marque?.toUpperCase() == filter.value?.toUpperCase()
+    }
+    return false
+  })
+}
 
 const layout = ref('grid');
 const displayDialog = ref(false);
@@ -54,7 +73,8 @@ onMounted(async ()=>{
       for (let i=0; i<allVehicules.length ; i++) {
         allVehicules[i].photos = (await axios
             .get("http://localhost:8080/vehicule/" + allVehicules[i].id + "/photo", {headers: {"Content-Type": "application/json"}})).data._embedded.photo
-      }vehicules.value = allVehicules; console.log(vehicules.value)
+      }vehicules.value = allVehicules;
+  vehiculesFiltres.value = allVehicules
 })
 
 function showDialog(vehicule: Vehicule) {
