@@ -1,5 +1,4 @@
 <template>
-
   <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
     <div class="text-center mb-5">
       <img src="src/assets/LogoParrot.svg" alt="Logo V Parrot" height="50" class="mb-3">
@@ -8,21 +7,10 @@
     </div>
   <Message v-if="error">Accès refusé</Message>
     <div>
-
       <label for="identifier" class="block text-900 font-medium mb-2">Email</label>
       <InputText v-model="identifier" type="text" class="w-full mb-3" />
-
       <label for="password" class="block text-900 font-medium mb-2">Mot de passe</label>
       <InputText v-model="password" type="password" class="w-full mb-3" />
-
-<!--      <div class="flex align-items-center justify-content-between mb-6">-->
-<!--        <div class="flex align-items-center">-->
-<!--          <Checkbox id="rememberme1" :binary="true" v-model="checked" class="mr-2"></Checkbox>-->
-<!--          <label for="rememberme1">Remember me</label>-->
-<!--        </div>-->
-<!--        <a class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Forgot password?</a>-->
-<!--      </div>-->
-
       <Button label="Se connecter" icon="pi pi-user" class="w-full" @click="login"></Button>
     </div>
   </div>
@@ -38,6 +26,7 @@ const error = ref(false)
 const identifier= ref()
 const password = ref()
 
+/** Fonction de vérification du login et mot de passe pour se connecter à l'administration du site */
 const login = () => {
   error.value = false
   axios

@@ -71,7 +71,7 @@ const onClickSave = async () => {
 
     axios
         .post("http://localhost:8080/employe", employe, {headers: {"Content-Type": "application/json"}})
-        .then((response: any) => { console.log(response)
+        .then((response: any) => {
             router.push('/AdministrationParrot')})
         .catch((err: AxiosError) => error.value = err.message)
   }

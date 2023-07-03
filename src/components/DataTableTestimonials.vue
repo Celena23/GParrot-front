@@ -11,12 +11,15 @@
                          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products">
                 <template #header>
                   <div class="flex flex-wrap gap-2 align-items-center justify-content-between">
-                    <h4 class="m-0">Véhicules en vente</h4>
+                    <h4 class="m-0">Tous les commentaires</h4>
                     <span class="p-input-icon-left">
                             <i class="pi pi-search" />
                             <InputText v-model="filters['global'].value" placeholder="Rechercher..." />
                         </span>
                   </div>
+                  <div class="flex flex-wrap gap-2 align-items-center justify-content-between">
+                    <Button label="Ajouter un commentaire" icon="pi pi-plus" severity="success" class="mr-2" @click="addCommentaire"/>
+                </div>
                 </template>
                 <Column selectionMode="multiple" style="width: 3rem" :exportable="false"></Column>
                 <Column field="name" header="Nom" sortable style="min-width:12rem" />
@@ -38,8 +41,9 @@ import {ref} from "vue";
 import {useRouter} from "vue-router";
 import {FilterMatchMode} from "primevue/api";
 import NavBarAdmin from "@/components/NavBarAdmin.vue";
+import Testimonials from "@/components/Testimonials.vue";
 const router = useRouter();
-const AddCommentaires= () => {
+const addCommentaire= () => {
   router.push('/ajoutcommentaire')
 }
 const validComment = (comment : any) => {

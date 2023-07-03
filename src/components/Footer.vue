@@ -1,5 +1,6 @@
 <template>
-  <div class="bg-primary px-4 py-8 md:px-6 lg:px-8">
+  <div id="footer" class="w-full">
+  <div class="bg-primary px-4 py-8 md:px-6 lg:px-8 w-full">
     <div class="bg-primary">
       <div class="grid flex">
         <div class="col-12 md:col-6">
@@ -16,14 +17,19 @@
       </div>
     </div>
   </div>
+  </div>
 </template>
 
-<script>
-export default {
-  name: "Footer"
-}
+<script setup lang="ts">
+
 </script>
 
 <style scoped>
-
+#footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  width: 100%;
+}
 </style>

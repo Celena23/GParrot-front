@@ -1,11 +1,14 @@
+<template>
+  <Testimonials :admin="true">
+  </Testimonials>
+</template>
+
 <script setup lang="ts">
 
-import EmployeForm from "@/components/EmployeForm.vue";
-import NavBarAdmin from "@/components/NavBarAdmin.vue";
+import Testimonials from "@/components/Testimonials.vue";
 </script>
 
-<template>
-  <NavBarAdmin/>
-  <EmployeForm/>
-</template>
+<style>
+
+</style>
 
