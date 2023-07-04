@@ -1,7 +1,7 @@
 <template>
 
   <div class="grid">
-    <Carousel :value="commentaires" :numVisible="3" :numScroll="1">
+    <Carousel :value="commentaires" :numVisible="3" :numScroll="1" :responsiveOptions="responsiveOptions">
       <template #item="slotProps">
         <div class="border-1 surface-border border-round m-2 text-center py-5 px-3" style="height: 90%">
           <div>
@@ -34,14 +34,31 @@ axios
       commentaires.value = response.data._embedded.commentaire;
     })
     .catch((err: AxiosError) => error.value = err.message)
+
+const responsiveOptions = ref([
+  {
+    breakpoint: '1199px',
+    numVisible: 3,
+    numScroll: 3
+  },
+  {
+    breakpoint: '991px',
+    numVisible: 2,
+    numScroll: 2
+  },
+  {
+    breakpoint: '767px',
+    numVisible: 1,
+    numScroll: 1
+  }
+]);
 </script>
 
 <style scoped>
 .grid {
-  margin: 10rem;
+  margin-top: 5rem;
+  /*width: 100%;*/
+
 }
 
-/*surface-card {*/
-/*  height: 90%;*/
-/*}*/
 </style>

@@ -1,9 +1,9 @@
 <template>
   <NavBar/>
   <TestimonialsExtract/>
-<!--  <div id="containerForm">-->
-<!--<Testimonials/>-->
-<!--  </div>-->
+  <div id="containerForm">
+<Testimonials/>
+  </div>
   <Footer/>
 
   </template>
