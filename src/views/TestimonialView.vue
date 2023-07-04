@@ -1,8 +1,9 @@
 <template>
   <NavBar/>
-  <div id="containerForm">
-<Testimonials/>
-  </div>
+  <TestimonialsExtract/>
+<!--  <div id="containerForm">-->
+<!--<Testimonials/>-->
+<!--  </div>-->
   <Footer/>
 
   </template>
@@ -12,6 +13,7 @@
   import Testimonials from "@/components/Testimonials.vue";
   import NavBar from "@/components/NavBar.vue";
   import Footer from "@/components/Footer.vue";
+  import TestimonialsExtract from "@/components/TestimonialsExtract.vue";
   </script>
 
   <style>

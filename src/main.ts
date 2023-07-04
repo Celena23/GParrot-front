@@ -14,13 +14,10 @@ import 'primeicons/primeicons.css';
 
 import InputText from "primevue/inputtext";
 import Button from "primevue/button";
-import Textarea from 'primevue/textarea';
-import FileUpload from 'primevue/fileupload';
 import ToastService from 'primevue/toastservice';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Calendar from 'primevue/calendar';
-import DataView from 'primevue/dataview';
 import Toolbar from 'primevue/toolbar';
 import { FilterMatchMode } from 'primevue/api';
 import DataView from 'primevue/dataview';
@@ -33,9 +30,11 @@ import FileUpload from 'primevue/fileupload';
 import Dialog from 'primevue/dialog';
 import Galleria from 'primevue/galleria';
 import Carousel from "primevue/carousel";
-import VueDisqus from 'vue-disqus'
 import Textarea from 'primevue/textarea';
 import InputSwitch from 'primevue/inputswitch';
+import StyleClass from 'primevue/styleclass';
+
+
 
 
 const app = createApp(App)
@@ -43,7 +42,7 @@ app.use(Primevue)
 app.use(createPinia())
 app.use(router)
 app.use(ToastService)
-app.use(VueDisqus, { shortname: 'piatce' })
+app.directive('styleclass', StyleClass);
 app.component("InputText", InputText)
 app.component("Button", Button)
 app.component("Textarea", Textarea)

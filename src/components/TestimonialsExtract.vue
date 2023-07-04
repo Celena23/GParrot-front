@@ -1,77 +1,47 @@
 <template>
 
-  <div class="surface-ground px-4 py-8 md:px-6 lg:px-8">
-<!--    <div class="text-900 font-medium text-2xl mb-5">Your Voice</div>-->
-    <div class="grid -mt-3 -ml-3 -mr-3">
-      <div class="col-12 xl:col-4">
-        <div class="p-2">
-          <div class="shadow-2 p-4 surface-card" style="border-radius: 1rem">
-            <div class="flex">
-              <div class="flex flex-column w-9 pr-4">
-                <span class="mb-4 text-900 font-medium">Jenny Wilson</span>
-                <span class="mb-3">
-                                <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
-                                <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
-                                <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
-                                <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
-                                <i class="pi pi-star-fill text-300"></i>
-                            </span>
-                <p class="text-700 m-0 p-0 line-height-3">Maecenas sed enim ut sem viverra aliquet eget sit amet.
-                  Faucibus nisl tincidunt eget nullam non nisi est.</p>
-              </div>
-            </div>
+  <div class="grid">
+    <Carousel :value="commentaires" :numVisible="3" :numScroll="1">
+      <template #item="slotProps">
+        <div class="border-1 surface-border border-round m-2 text-center py-5 px-3" style="height: 90%">
+          <div>
+            <h4 class="mb-1 font-light text-xl">{{ slotProps.data.commentaire }}</h4>
+            <h6 class=" font-light text-sm ">{{ slotProps.data.name }}</h6>
           </div>
         </div>
-      </div>
-      <div class="col-12 xl:col-4">
-        <div class="p-2">
-          <div class="shadow-2 p-4 surface-card" style="border-radius: 1rem">
-            <div class="flex">
-<!--              <div class="flex flex-column w-9 pr-4">-->
-<!--                <span class="mb-4 text-900 font-medium">Wade Warren</span>-->
-<!--                <span class="mb-3">-->
-<!--                                <i class="pi pi-star-fill text-yellow-500 mr-1"></i>-->
-<!--                                <i class="pi pi-star-fill text-yellow-500 mr-1"></i>-->
-<!--                                <i class="pi pi-star-fill text-yellow-500 mr-1"></i>-->
-<!--                                <i class="pi pi-star-fill text-yellow-500 mr-1"></i>-->
-<!--                                <i class="pi pi-star-fill text-300"></i>-->
-<!--                            </span>-->
-<!--                <p class="text-700 m-0 p-0 line-height-3">Pellentesque eu tincidunt tortor aliquam nulla facilisi. Nunc consequat interdum varius sit amet mattis. 🔥</p>-->
-<!--              </div>-->
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 xl:col-4">
-        <div class="p-2">
-          <div class="shadow-2 p-4 surface-card" style="border-radius: 1rem">
-            <div class="flex">
-              <div class="flex flex-column w-9 pr-4">
-                <span class="mb-4 text-900 font-medium">Jenny Wilson</span>
-                <span class="mb-3">
-                                <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
-                                <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
-                                <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
-                                <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
-                                <i class="pi pi-star-fill text-300"></i>
-                            </span>
-                <p class="text-700 m-0 p-0 line-height-3">Cursus sit amet dictum sit amet justo donec enim diam.
-                  Eget gravida cum sociis natoque penatibus et magnis. 👏</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      </template>
+    </Carousel>
   </div>
 </template>
 
-<script>
-export default {
-  name: "TestimonialsExtract"
-}
+<script setup lang="ts">
+import {Commentaire} from "@/entities/Commentaire";
+import axios, {AxiosError} from "axios";
+import {ref} from "vue";
+import {useRouter} from "vue-router";
+
+const router = useRouter();
+const layout = ref('grid');
+
+
+const commentaires = ref<Commentaire[] | null>(null);
+const selectedCommentaires = ref();
+const error = ref();
+axios
+    .get("http://localhost:8080/commentaire/search/findByValid?valid=true", {headers: {"Content-Type": "application/json"}})
+    .then((response: any) => {
+
+      commentaires.value = response.data._embedded.commentaire;
+    })
+    .catch((err: AxiosError) => error.value = err.message)
 </script>
 
 <style scoped>
+.grid {
+  margin: 10rem;
+}
 
+/*surface-card {*/
+/*  height: 90%;*/
+/*}*/
 </style>

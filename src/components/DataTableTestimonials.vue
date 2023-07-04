@@ -57,6 +57,8 @@ const filters = ref({
   'global': {value: null, matchMode: FilterMatchMode.CONTAINS},
 });
 
+/** Enlever valid=false */
+
   const commentaires = ref<Commentaire[] | null>(null);
   const error = ref()
   axios

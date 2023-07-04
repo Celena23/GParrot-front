@@ -6,12 +6,6 @@
         </template>
         <template #grid="slotProps">
           <div class="col-12 sm:col-12 md:12 lg:col-6 xl:col-6 p-6">
-
-<!--            <div v-for="(vehicule, index) in vehiculesFiltres" :key="index">-->
-<!--              &lt;!&ndash; Display the filtered vehicle data here &ndash;&gt;-->
-<!--              {{ vehicule.marque }} - {{ vehicule.modele }}-->
-<!--            </div>-->
-
             <div class="p-4 border-1 surface-border cursor-pointer" @click="showDialog(slotProps.data)">
               <div class="p-4">
                 <div v-if="slotProps.data.photos?.length > 0">
@@ -57,6 +51,18 @@ const filterVehicule = (filter:any) => {
         return true;
       }
       return vehicule.marque?.toUpperCase() == filter.value?.toUpperCase()
+    }
+    return false
+  })
+}
+
+const filterPrixVehicule = (filter:any) => {
+  console.log(filter)
+  vehiculesFiltres.value = vehicules.value?.filter((vehicule) => {
+    if (filter.type == 'prix') {
+      if (filter.value == 'Toutes les prix') {
+        return true;
+      }
     }
     return false
   })
