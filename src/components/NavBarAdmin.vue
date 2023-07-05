@@ -26,13 +26,13 @@
         </RouterLink>
         <RouterLink to="/ajoutservice">
         <li>
-          <a v-ripple class="flex px-0 lg:px-5 py-3 hover:text-blue-600 font-medium text-xl transition-colors transition-duration-150 p-ripple">
+          <a v-ripple v-if="isAdministrator()" class="flex px-0 lg:px-5 py-3 hover:text-blue-600 font-medium text-xl transition-colors transition-duration-150 p-ripple">
             <span>GESTION DES SERVICES</span>
           </a>
         </li>
         </RouterLink>
         <li>
-          <a v-ripple class="flex px-0 lg:px-5 py-3 hover:text-blue-600 font-medium text-xl transition-colors transition-duration-150 p-ripple">
+          <a v-ripple v-if="isAdministrator()" class="flex px-0 lg:px-5 py-3 hover:text-blue-600 font-medium text-xl transition-colors transition-duration-150 p-ripple">
             <span>GESTION DES HORAIRES</span>
           </a>
         </li>
