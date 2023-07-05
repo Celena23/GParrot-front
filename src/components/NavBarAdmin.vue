@@ -38,7 +38,7 @@
         </li>
         <RouterLink to="/ajoutemploye">
         <li>
-          <a v-ripple class="flex px-0 lg:px-5 py-3 hover:text-blue-600 font-medium text-xl transition-colors transition-duration-150 p-ripple">
+          <a v-ripple v-if="isAdministrator()" class="flex px-0 lg:px-5 py-3 hover:text-blue-600 font-medium text-xl transition-colors transition-duration-150 p-ripple">
             <span>GESTION DES ACCES</span>
           </a>
         </li>
@@ -49,6 +49,13 @@
 </template>
 
 <script setup lang="ts">
+import {userStore} from "@/stores/userStore";
+
+const store = userStore()
+
+const isAdministrator = (): boolean => {
+  return store.employe?.admin === true ;
+}
 
 </script>
 

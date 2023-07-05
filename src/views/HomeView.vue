@@ -12,7 +12,8 @@ import Footer from "@/components/Footer.vue";
     <Hero/>
     <Services/>
     <div class="p-6">
-      <div class="text-2xl md:text-3xl border-2 border-black-alpha-90 surface-border border-round surface-card line-height-4 px-6">
+      <div
+          class="text-2xl md:text-3xl border-2 border-black-alpha-90 surface-border border-round surface-card line-height-4 px-6">
         <p>
           Nous assurons toutes les réparations mécaniques de votre véhicule, diagnostic, révision, entretien,
           réparation.<br>

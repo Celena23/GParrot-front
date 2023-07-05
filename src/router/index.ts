@@ -3,9 +3,6 @@ import HomeView from '../views/HomeView.vue'
 import VehiculesToSale from "@/views/VehiculesToSale.vue";
 import AdminParrotView from "@/views/AdminParrotView.vue";
 import LoginView from "@/views/LoginView.vue";
-import VehiculeForm from "@/components/VehiculeForm.vue";
-import EmployeForm from "@/components/EmployeForm.vue";
-import DataTableVehicule from "@/components/DataTableVehicule.vue";
 import AddEmployeView from "@/views/AddEmployeView.vue";
 import AddVehiculeView from "@/views/AddVehiculeView.vue";
 import TestimonialView from "@/views/TestimonialView.vue";

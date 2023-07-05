@@ -2,7 +2,7 @@
   <div
       class="surface-overlay py-3 px-6 flex align-items-center justify-content-between relative lg:static border-bottom-1 border-gray-200 ">
     <RouterLink to="/">
-      <img src="src/assets/LogoParrot.svg" alt="LOGO V PARROT" height="50">
+      <img src="/src/assets/LogoParrot.svg" alt="LOGO V PARROT" height="50">
     </RouterLink>
     <a class="cursor-pointer block lg:hidden text-700"
        v-styleclass="{ selector: '@next', enterClass: 'hidden', leaveToClass: 'hidden', hideOnOutsideClick: true }">

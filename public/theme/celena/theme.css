@@ -2593,10 +2593,11 @@ body {
     border-radius: 0;
 }
 .p-datatable .p-datatable-header {
-    background: #efefef;
+    background: rgb(255, 255, 255);
     color: var(--text-color);
     border: solid #dee2e6;
-    border-width: 1px 0 0 0;
+    border-width: 1px 0 1px 0;
+    border-color: orange;
     padding: 1rem 1rem;
     font-weight: 600;
 }

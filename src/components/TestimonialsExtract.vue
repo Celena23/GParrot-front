@@ -57,8 +57,6 @@ const responsiveOptions = ref([
 <style scoped>
 .grid {
   margin-top: 5rem;
-  /*width: 100%;*/
-
 }
 
 </style>

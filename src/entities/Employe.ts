@@ -4,4 +4,5 @@ export type Employe = {
     firstname?: string ;
     password?: number ;
     identifier?: string ;
+    admin?: boolean ;
 }

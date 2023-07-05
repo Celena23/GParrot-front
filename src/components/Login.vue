@@ -1,7 +1,7 @@
 <template>
   <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
     <div class="text-center mb-5">
-      <img src="src/assets/LogoParrot.svg" alt="Logo V Parrot" height="50" class="mb-3">
+      <img src="/src/assets/LogoParrot.svg" alt="Logo V Parrot" height="50" class="mb-3">
       <div class="text-900 text-3xl font-medium mb-3">Garage PARROT</div>
       <span class="text-600 font-medium line-height-3">Bienvenue</span>
     </div>
@@ -20,8 +20,9 @@
 import { ref } from 'vue';
 import axios, {AxiosError} from "axios";
 import router from "@/router";
+import {userStore} from "@/stores/userStore";
 
-
+const store = userStore()
 const error = ref(false)
 const identifier= ref()
 const password = ref()
@@ -30,10 +31,11 @@ const password = ref()
 const login = () => {
   error.value = false
   axios
-      .get("http://localhost:8080/employe/search/existsByIdentifierAndPassword?identifier="+ identifier.value + "&password=" + password.value,{headers: {"Content-Type": "application/json"}})
+      .get("http://localhost:8080/employe/search/findByIdentifierAndPassword?identifier="+ identifier.value + "&password=" + password.value,{headers: {"Content-Type": "application/json"}})
       .then((result)=> {
         console.log(result)
-        if (result.data == true) {
+        if (result.data) {
+          store.employe = result.data
           console.log("ca marche ?")
           router.push('/AdministrationParrot')
         }
