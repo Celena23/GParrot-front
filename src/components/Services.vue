@@ -61,7 +61,6 @@ const error = ref()
 axios
     .get("http://localhost:8080/service/1", {headers: {"Content-Type": "application/json"}})
     .then((response: any) => {
-      console.log(response.data)
       services.value = response.data;
     })
     .catch((err: AxiosError) => error.value = err.message)

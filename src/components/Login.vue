@@ -33,10 +33,8 @@ const login = () => {
   axios
       .get("http://localhost:8080/employe/search/findByIdentifierAndPassword?identifier="+ identifier.value + "&password=" + password.value,{headers: {"Content-Type": "application/json"}})
       .then((result)=> {
-        console.log(result)
         if (result.data) {
           store.employe = result.data
-          console.log("ca marche ?")
           router.push('/AdministrationParrot')
         }
         else {
