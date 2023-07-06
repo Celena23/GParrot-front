@@ -14,9 +14,18 @@
     <InputSwitch v-model="v$.valid.$model" v-if="admin"/>
     <div class="surface-border border-top-1 opacity-50 mb-3 col-12"></div>
     <div class="col-12">
+      <template v-if="admin">
+        <RouterLink to="/admin/commentaire">
       <Button label="Envoyer" icon="pi pi-send" class="w-auto mt-3 @click" @click="onClickSave"></Button>
+        </RouterLink>
+      </template>
+      <template v-if="!admin">
+        <RouterLink to="/">
+          <Button label="Envoyer" icon="pi pi-send" class="w-auto mt-3 @click" @click="onClickSave"></Button>
+        </RouterLink>
+      </template>
       <RouterLink to="/admin/commentaire">
-      <Button label="Annuler" class="w-auto mt-3 ml-3"></Button>
+      <Button label="Annuler" class="w-auto mt-3 ml-3" v-if="admin"></Button>
       </RouterLink>
     </div>
   </div>
@@ -61,7 +70,7 @@ const onClickSave = async () => {
     axios
         .post("http://localhost:8080/commentaire", commentaire, {headers: {"Content-Type": "application/json"}})
         .then((response: any) => {
-          router.push('/admin/commentaire')
+          // router.push('/admin/commentaire')
           success.value = true
         })
         .catch((err: AxiosError) => error.value = err.message)

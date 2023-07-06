@@ -8,3 +8,6 @@ export type Vehicule = {
     morningSaturdayEnd?: string ;
 
 }
+
+export class Horaires {
+}

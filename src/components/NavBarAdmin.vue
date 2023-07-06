@@ -32,9 +32,11 @@
         </li>
         </RouterLink>
         <li>
+          <RouterLink to="/horaires">
           <a v-ripple v-if="isAdministrator()" class="flex px-0 lg:px-5 py-3 hover:text-blue-600 font-medium text-xl transition-colors transition-duration-150 p-ripple">
             <span>GESTION DES HORAIRES</span>
           </a>
+          </RouterLink>
         </li>
         <RouterLink to="/ajoutemploye">
         <li>

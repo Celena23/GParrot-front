@@ -46,9 +46,7 @@
           </li>
           <li class="flex align-items-center py-3 px-2  flex-wrap">
             <div class="text-700 w-6 md:w-2 font-medium md:text-xl">Transmission</div>
-            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1 md:text-2xl">{{
-                vehicule.transmission
-              }}
+            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1 md:text-2xl">{{vehicule.transmission}}
             </div>
           </li>
           <li class="flex align-items-center py-3 px-2  flex-wrap">

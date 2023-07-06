@@ -11,8 +11,13 @@
 <!--          <div class="text-white mb-3"><i class="pi pi-inbox surface-800 border-round p-1 mr-2"></i><a :href="'mailto:san@antonio.net?subject=' +id Voiture + '&cc=' + cc + '&bcc=avocat@antonio.net&body=Bonjour" >contact@vparrot.com</a></div>-->
         </div>
         <div class="col-12 md:col-6 text-gray-200 flex flex-column justify-content-start align-items-end">
-          <div class="text-white font-bold line-height-3 mb-3">NOS HORAIRES D'OUVERTURES</div>
-          <a class="line-height-3 block cursor-pointer mb-2">A paramétrer</a>
+          <div class="text-white text-lg font-bold line-height-3 mb-3">NOS HORAIRES D'OUVERTURES</div>
+          <div class="text-white text-lg line-height-3 mb-3">Du lundi au vendredi :</div>
+          <a class="line-height-3 block  mb-2">De {{ horaire?.morningWeekDayStart }} à {{ horaire?.morningWeekDayEnd }} </a>
+          <a class="line-height-3  block  mb-2">De {{ horaire?.afternoonWeekDayStart }} à {{ horaire?.afternoonWeekDayEnd }} </a>
+          <div class="text-white text-lg line-height-3 mb-3">Le samedi :</div>
+          <a class="line-height-3 block  mb-2">De {{ horaire?.morningSaturdayStart }} à {{ horaire?.morningSaturdayEnd }} </a>
+          <div class="text-white mt-2 text-xs font-light line-height-3 mb-3">Nous apportons autant de précision à nos horaires qu'à vos véhicules ! </div>
         </div>
       </div>
     </div>
@@ -21,7 +26,18 @@
 </template>
 
 <script setup lang="ts">
+import {ref} from "vue";
+import { Horaires } from "@/entities/Horaires";
+import axios, {AxiosError} from "axios";
 
+const horaire = ref<Horaires | null>(null);
+const error = ref()
+axios
+    .get("http://localhost:8080/horaires/1", {headers: {"Content-Type": "application/json"}})
+    .then((response: any) => {
+      horaire.value = response.data;
+    })
+    .catch((err: AxiosError) => error.value = err.message)
 </script>
 
 <style scoped>
