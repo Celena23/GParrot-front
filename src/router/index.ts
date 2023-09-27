@@ -1,5 +1,5 @@
 import {createRouter, createWebHistory} from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+
 import VehiculesToSale from "@/views/VehiculesToSale.vue";
 import AdminParrotView from "@/views/AdminParrotView.vue";
 import LoginView from "@/views/LoginView.vue";
@@ -11,6 +11,7 @@ import AddServiceView from "@/views/AddServiceView.vue";
 import AddCommentaireView from "@/views/AddCommentaireView.vue";
 import DataTableTestimonials from "@/components/DataTableTestimonials.vue";
 import AddHorairesView from "@/views/AddHorairesView.vue";
+import HomeView from "@/views/HomeView.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),

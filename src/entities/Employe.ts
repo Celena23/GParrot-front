@@ -2,7 +2,7 @@ export type Employe = {
     id?: number ;
     name?: string ;
     firstname?: string ;
-    password?: number ;
+    password?: string ;
     identifier?: string ;
     admin?: boolean ;
 }

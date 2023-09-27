@@ -1,5 +1,4 @@
 <template>
-
   <div class="grid">
     <Carousel :value="commentaires" :numVisible="3" :numScroll="1" :responsiveOptions="responsiveOptions">
       <template #item="slotProps">

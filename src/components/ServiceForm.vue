@@ -36,8 +36,9 @@
 import {onMounted, reactive, ref} from "vue";
 import {useVuelidate} from '@vuelidate/core';
 import {required} from "@vuelidate/validators";
-import axios, {AxiosError, AxiosResponse} from "axios";
+import axios, {AxiosError} from "axios";
 import {useRouter} from "vue-router";
+import {userStore} from "@/stores/userStore";
 
 const service = reactive({
   servicemeca: '',
@@ -55,6 +56,7 @@ const v$ = useVuelidate(rules, service)
 let error = ref<string | undefined>();
 let errorMessage = 'Ce champ est obligatoire';
 const router = useRouter();
+const store = userStore();
 
 const onClickSave = async () => {
 
@@ -64,7 +66,8 @@ const onClickSave = async () => {
   else {
 
     axios
-        .put("http://localhost:8080/service/1", service, {headers: {"Content-Type": "application/json"}})
+        .put("http://localhost:8080/service/1", service, {headers: {"Content-Type": "application/json"},
+          auth: { username: store.employe!.identifier!, password: store.employe!.password! }})
         .then((response: any) => {
           router.push('/AdministrationParrot')
         })
@@ -78,6 +81,7 @@ onMounted(async () => {
   service.servicecaro = data.servicecaro
   service.serviceentretien = data.serviceentretien
 })
+
 </script>
 
 <style>

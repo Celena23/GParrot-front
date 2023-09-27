@@ -50,6 +50,7 @@ import {useVuelidate} from '@vuelidate/core';
 import {required} from "@vuelidate/validators";
 import axios, {AxiosError} from "axios";
 import {useRouter} from "vue-router";
+import {userStore} from "@/stores/userStore";
 
 const service = reactive({
   morningWeekDayStart: '',
@@ -73,7 +74,7 @@ const v$ = useVuelidate(rules, service)
 let error = ref<string | undefined>();
 let errorMessage = 'Ce champ est obligatoire';
 const router = useRouter();
-
+const store = userStore();
 const onClickSave = async () => {
 
   error.value = undefined
@@ -82,7 +83,10 @@ const onClickSave = async () => {
   else {
 
     axios
-        .put("http://localhost:8080/horaires/1", service, {headers: {"Content-Type": "application/json"}})
+        .put("http://localhost:8080/horaires/1", service, {
+          headers: {"Content-Type": "application/json"},
+          auth: { username: store.employe!.identifier!, password: store.employe!.password! }
+        })
         .then((response: any) => {
           router.push('/AdministrationParrot')
         })

@@ -113,6 +113,7 @@ import {required} from "@vuelidate/validators";
 
 import axios, {AxiosError, AxiosResponse} from "axios";
 import {useRouter} from "vue-router";
+import {userStore} from "@/stores/userStore";
 
 const vehicule = reactive({
   marque: '',
@@ -154,7 +155,7 @@ let errorMessage = 'Ce champ est obligatoire';
 const router = useRouter();
 const uploadForm = ref<any>();
 
-
+const store = userStore();
 const onClickSave = async () => {
 
   error.value = undefined
@@ -163,7 +164,10 @@ const onClickSave = async () => {
   else {
 
     axios
-        .post("http://localhost:8080/vehicule", vehicule, {headers: {"Content-Type": "application/json"}})
+        .post("http://localhost:8080/vehicule", vehicule, {
+          headers: {"Content-Type": "application/json"},
+          auth: { username: store.employe!.identifier!, password: store.employe!.password! }
+        })
         .then((response: any) => {
           router.push('/AdministrationParrot')
           savePhotos(response.data.id)

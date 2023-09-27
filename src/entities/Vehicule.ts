@@ -14,5 +14,4 @@ export type Vehicule = {
     prix?: number ;
     dateVente?: Date ;
     photos?: any ;
-
 }

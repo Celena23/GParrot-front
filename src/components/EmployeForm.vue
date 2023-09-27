@@ -41,6 +41,7 @@ import {useVuelidate} from '@vuelidate/core';
 import {required} from "@vuelidate/validators";
 import axios, {AxiosError, AxiosResponse} from "axios";
 import {useRouter} from "vue-router";
+import {userStore} from "@/stores/userStore";
 
 const employe = reactive({
   name: '',
@@ -56,6 +57,7 @@ const rules = {
 }
 
 const v$ = useVuelidate(rules, employe)
+const store = userStore();
 
 let error = ref<string | undefined>();
 let errorMessage = 'Ce champ est obligatoire';
@@ -69,7 +71,10 @@ const onClickSave = async () => {
   else {
 
     axios
-        .post("http://localhost:8080/employe", employe, {headers: {"Content-Type": "application/json"}})
+        .post("http://localhost:8080/employe", employe, {
+          headers: { "Content-Type": "application/json"},
+          auth: { username: store.employe!.identifier!, password: store.employe!.password! }
+        })
         .then((response: any) => {
           router.push('/AdministrationParrot')
         })
